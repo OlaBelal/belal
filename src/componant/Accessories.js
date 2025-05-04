@@ -1,17 +1,26 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'react-bootstrap/Image';
 import Footer from './Footer';
-import WemanProduct from './WemanProduct';
+import AccessoriesProduct from './AccessoriesProduct';
 import { Button, Form } from 'react-bootstrap';
 
-function Weman() {
+function Accessories() {
+  const api_url = "https://fakestoreapi.com/products/category/jewelery";
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    fetch(api_url)
+      .then((res) => res.json())
+      .then((data) => setProducts(data));
+  }, []);
+
   return (
     <>
-      {/* Full-width Banner Image */}
+      {/* Banner */}
       <div style={{ position: 'relative', width: '100%' }}>
         <Image
-          src="/assets/images/we8.jpg"
-          alt="Fashion Banner"
+          src="https://i.shgcdn.com/b559c107-8082-42b9-9171-11fa3659b710/-/format/auto/-/preview/3000x3000/-/quality/lighter/"
+          alt="Accessories Banner"
           fluid
           style={{ width: '100%', height: '480px', objectFit: 'cover' }}
         />
@@ -25,67 +34,60 @@ function Weman() {
           borderRadius: '12px',
           textAlign: 'center'
         }}>
-          <h1 className="fw-bold text-dark">Elegant Styles for Every Woman</h1>
-          <p className="text-muted fs-5">Shop the latest arrivals now</p>
-          
+          <h1 className="fw-bold text-dark">Elegant Accessories</h1>
+          <p className="text-muted fs-5">Add a touch of style to your look</p>
         </div>
       </div>
 
-      {/* Header Text */}
+      {/* Header */}
       <div className="text-center my-5">
-        <h2 className="fw-bold">Women's Fashion</h2>
+        <h2 className="fw-bold">Accessories Collection</h2>
         <hr style={{ width: '100px', margin: 'auto', borderTop: '3px solid #000' }} />
-        <p className="text-muted fs-5 mt-3">Explore the latest trends in women's clothing, accessories, and more!</p>
+        <p className="text-muted fs-5 mt-3">Explore rings, necklaces, and more fashion jewelry!</p>
       </div>
 
-      {/* Main Content with Sidebar */}
+      {/* Layout */}
       <div className="container mb-5">
         <div className="row">
           {/* Sidebar Filters */}
           <div className="col-md-3 mb-4">
             <div className="p-3 shadow-sm rounded border bg-white">
               <h5 className="fw-bold mb-3">Filter By</h5>
-              
-              {/* Category Filter */}
+
               <Form.Group className="mb-3">
-                <Form.Label>Category</Form.Label>
-                <Form.Check type="checkbox" label="Dresses" />
-                <Form.Check type="checkbox" label="Tops" />
-                <Form.Check type="checkbox" label="Pants" />
-                <Form.Check type="checkbox" label="Accessories" />
+                <Form.Label>Type</Form.Label>
+                <Form.Check type="checkbox" label="Necklaces" />
+                <Form.Check type="checkbox" label="Rings" />
+                <Form.Check type="checkbox" label="Bracelets" />
+                <Form.Check type="checkbox" label="Earrings" />
               </Form.Group>
 
-              {/* Size Filter */}
               <Form.Group className="mb-3">
-                <Form.Label>Size</Form.Label>
+                <Form.Label>Price Range</Form.Label>
                 <Form.Select>
                   <option>Select</option>
-                  <option>XS</option>
-                  <option>S</option>
-                  <option>M</option>
-                  <option>L</option>
-                  <option>XL</option>
+                  <option>Under $50</option>
+                  <option>$50 - $100</option>
+                  <option>Over $100</option>
                 </Form.Select>
               </Form.Group>
 
-             
               <Button variant="dark" className="mt-3 w-100">Apply Filters</Button>
             </div>
           </div>
 
-          {/* Products */}
+          {/* Product List */}
           <div className="col-md-9">
             <div className="row justify-content-center">
-              <WemanProduct />
+              <AccessoriesProduct />
             </div>
           </div>
         </div>
       </div>
 
-      {/* Footer */}
       <Footer />
     </>
   );
 }
 
-export default Weman;
+export default Accessories;

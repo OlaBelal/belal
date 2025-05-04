@@ -31,7 +31,7 @@ function MyCard({ title, price, img, desc, inStock, index }) {
     } else if (index === 1) {
       return "/Men";
     } else if (index === 2) {
-      return "/Kids";
+      return "/Accessories";
     } else {
       return "/";
     }

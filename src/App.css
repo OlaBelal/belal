@@ -94,9 +94,35 @@ Header part end here
 /* ------------
 Footer part
 --------------- */
-footer {
-  background-color: var(--color-232f3e);
-  border-top: 1px solid var(--color-3b4149);
+.hover-dark:hover {
+  color: #333 !important;
+  transition: color 0.3s ease;
+}
+
+.hover-underline {
+  position: relative;
+}
+
+.hover-underline:after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 1px;
+  bottom: 0;
+  left: 0;
+  background-color: #333;
+  transition: width 0.3s ease;
+}
+
+.hover-underline:hover:after {
+  width: 100%;
+}
+
+.social-icon:hover {
+  transform: translateY(-3px);
+  transition: transform 0.3s ease;
+  opacity: 0.8;
+  color: #000 !important;
 }
 /*---------
  Footer part end here 
@@ -286,3 +312,7 @@ footer {
     text-align: right;
     margin-left: auto;
   }
+
+  
+
+  

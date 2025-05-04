@@ -4,6 +4,7 @@ import { removeFromCart } from '../rtk/slices/Cart-slice';
 import Product from './product';
 import Badge from 'react-bootstrap/Badge';
 import Button from 'react-bootstrap/Button';
+import { Container, Row, Col, Card } from 'react-bootstrap';
 
 function Cart() {
   const cartItems = useSelector((state) => state.cart);
@@ -16,38 +17,44 @@ function Cart() {
   const totalPrice = cartItems.reduce((total, item) => total + item.price, 0);
 
   return (
-    <div className="container mt-4">
+    <Container className="mt-5">
       {cartItems.length > 0 ? (
-        <div className="cart-items">
-          {cartItems.map((item) => (
-            <div key={item.id} className="cart-item">
-              <div className="card">
-                <Product product={item} buttonshow={false} />
-                <div className="card-footer d-flex justify-content-between align-items-center">
-                  <Button
-                    variant="danger"
-                    onClick={() => handleRemoveFromCart(item.id)}
-                  >
-                    Remove from Cart
-                  </Button>
-                </div>
-              </div>
-            </div>
-          ))}
-          <div className="total-price-bar text-light ">
-            <h5>Total Price: ${totalPrice.toFixed(2)}</h5>
+        <div>
+          <Row>
+            {cartItems.map((item) => (
+              <Col key={item.id} xs={12} md={6} lg={4} className="my-3">
+                <Card className="shadow-sm rounded-lg">
+                  <Product product={item} buttonshow={false} />
+                  <Card.Footer className="d-flex justify-content-between align-items-center">
+                    <Button
+                      variant="danger"
+                      onClick={() => handleRemoveFromCart(item.id)}
+                    >
+                      Remove from Cart
+                    </Button>
+                  </Card.Footer>
+                </Card>
+              </Col>
+            ))}
+          </Row>
+          <div className="total-price-bar text-center my-4">
+            <h4>Total Price:</h4>
+            <h5 className="fw-bold text-primary">${totalPrice.toFixed(2)}</h5>
+            <Button variant="success" className="mt-3 px-5">
+              Proceed to Checkout
+            </Button>
           </div>
         </div>
       ) : (
         <div className="text-center">
-          <br /> <br /> <br />
-          <h1>No products in your basket.</h1>
-          <br /> <br /> <br />
-          <h5>You can start shopping right away by checking the suggestions,</h5>
-          <h5>or you can discover DeFacto with the category links.</h5>
+          <h1 className="mb-4">Your Cart is Empty</h1>
+          <h5>Start adding products to your cart from the shop!</h5>
+          <Button variant="primary" className="mt-3" href="/Weman">
+            Continue Shopping
+          </Button>
         </div>
       )}
-    </div>
+    </Container>
   );
 }
 
